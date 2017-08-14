@@ -19,5 +19,6 @@ private:
 	std::vector<ModBase> 	modVec;	
 	ServerStates		state;
 	unsigned long 		frame_run_time;
+	unsigned long		frame_run_count;
 };
  

@@ -6,7 +6,8 @@
 
 using namespace std;
 
-Loop::Loop():state(INIT),frame_run_time(SecondN){
+Loop::Loop():state(INIT),frame_run_time(SecondN),
+	frame_run_count(0){
 	
 }
 
@@ -29,7 +30,9 @@ bool Loop::wait(){
 
 
 void Loop::run(){
-	spdlog::get("console")->info("run");
+	if (frame_run_count % 60 == 0)
+		spdlog::get("console")->info("run");
+	frame_run_count++;
 }
 
 void Loop::end(){
@@ -64,10 +67,9 @@ void Loop::loop(){
 		if(elapse_time < frame_run_time){
 			sleep_time = frame_run_time -  elapse_time;
 			nsleep(sleep_time);
-			spdlog::get("console")->info("now: {:d},runing time sleep {:d} ns",xnano(),sleep_time);
-			//cout << "now: " << xnano() << ",runing time sleep " << sleep_time << " ns," << endl;	
+			//spdlog::get("console")->info("now: {:d},runing time sleep {:d} ns",xnano(),sleep_time);
 		}else{
-			cout << "runing time more than " << (elapse_time-frame_run_time) << " ns" << endl;	
+			spdlog::get("console")->info("runing time more than {:d} ns",elapse_time-frame_run_time);
 		};
 	}
 }
