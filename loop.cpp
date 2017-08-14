@@ -15,27 +15,45 @@ Loop::~Loop(){
 	
 }
 
+void Loop::add_mod(ModBase* mod){
+	modVec.push_back(mod);
+}
+
 void Loop::set_server_state(enum ServerStates s){
 	state=s;
 }
 
 void Loop::init(){
+	for (auto mod : modVec) {
+		mod->init();
+	}
 	spdlog::get("console")->info("init");
 }
 
 bool Loop::wait(){
+	for (auto mod : modVec) {
+		if (!mod->wait())
+			return false;
+	}
 	spdlog::get("console")->info("wait");
 	return true;
 }
 
 
 void Loop::run(){
-	if (frame_run_count % 60 == 0)
+	if (frame_run_count % 60 == 0){
+		for (auto mod : modVec) {
+			mod->run();	
+		}
 		spdlog::get("console")->info("run");
+	};
 	frame_run_count++;
 }
 
 void Loop::end(){
+	for (auto mod : modVec) {
+		mod->end();	
+	}
 	spdlog::get("console")->info("end");
 }
 

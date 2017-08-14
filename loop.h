@@ -10,13 +10,14 @@ public:
 	Loop();
 	~Loop();
 	void loop();
+	void add_mod(ModBase*);
 	void set_server_state(enum ServerStates s);
 private:
 	void init();
 	bool wait();
 	void run();
 	void end();
-	std::vector<ModBase> 	modVec;	
+	std::vector<ModBase*> 	modVec;	
 	ServerStates		state;
 	unsigned long 		frame_run_time;
 	unsigned long		frame_run_count;

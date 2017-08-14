@@ -2,16 +2,16 @@ CFLAG= -g -Wall
 gcc=g++ -std=c++11 $(CFLAG) 
 default:main
 
-time.o:utils/time.cpp
-	$(gcc) -c utils/time.cpp
+utils.o:
+	$(gcc) -o utils.o -c utils/time.cpp
 
-loop.o:time.o 
-	$(gcc) -c loop.cpp 
+mods.o:
+	$(gcc) -o mods.o -c mods/test.cpp 
 
-main:loop.o
-	$(gcc) -o cmod loop.o time.o main.cpp 
+main:utils.o mods.o
+	$(gcc) -o cmod utils.o mods.o loop.cpp main.cpp 
 
 clean :
-	rm cmod
 	rm *.o
 	rm -rf *dSYM
+	rm cmod
