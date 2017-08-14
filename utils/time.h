@@ -1,3 +1,4 @@
+#include <time.h>
 #include <sys/time.h>
 
 const unsigned long	Nanosecond	      = 1;					 //纳秒 ns
