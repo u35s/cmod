@@ -27,6 +27,6 @@ public:
 	bool timeup(unsigned long nano);
 
 private:
-	unsigned long _last_nano;
-	unsigned long _interval;
+	unsigned long last_nano;
+	unsigned long interval;
 };

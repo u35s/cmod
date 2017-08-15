@@ -42,18 +42,18 @@ Timer::~Timer(){
 };
 
 unsigned long Timer::elapse(){
-	return xnano() - _last_nano;
+	return xnano() - last_nano;
 };
 
 void Timer::reset(){
-	_last_nano=xnano();
+	last_nano=xnano();
 };
 
 
 bool Timer::timeup(unsigned long nano){
-	unsigned long v = _last_nano;
-	while(nano > v+_interval)
-		_last_nano+=_interval;
-	return v != _last_nano;
+	unsigned long v = last_nano;
+	while(nano > v+interval)
+		last_nano+=interval;
+	return v != last_nano;
 };
 
